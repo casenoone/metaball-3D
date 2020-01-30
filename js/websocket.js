@@ -1,0 +1,1 @@
+MFAC.Socket = function() {}
