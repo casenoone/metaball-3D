@@ -92,6 +92,8 @@ MFAC.Vector3.prototype = {
 
     clone : function() { return new MFAC.Vector3(this.x, this.y, this.z); },
 
+    LoadZero : function() {return new MFAC.Vector3(0, 0, 0)},
+
     applyQuaternion: function ( q ) {
 
 		var x = this.x;

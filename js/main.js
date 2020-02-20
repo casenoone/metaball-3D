@@ -202,7 +202,7 @@ onload = function() {
     var edgeIndex = function() {
 
         this.edge = 0;
-        this.type = "X-DIF";//x方向坐标不同,其他坐标都相同
+        this.type = 0;//x方向坐标不同,其他坐标都相同
 
     }
 
@@ -214,7 +214,7 @@ onload = function() {
 
     }
 
-    eIndex[0].edge   = new MFAC.Vector2(0, 1);      eIndex[0].type  = "Z-DIF";
+    /*eIndex[0].edge   = new MFAC.Vector2(0, 1);      eIndex[0].type  = "Z-DIF";
     eIndex[1].edge   = new MFAC.Vector2(1, 2);      eIndex[1].type  = "Y-DIF";       
     eIndex[2].edge   = new MFAC.Vector2(2, 3);      eIndex[2].type  = "Z-DIF";
     eIndex[3].edge   = new MFAC.Vector2(3, 0);      eIndex[3].type  = "Y-DIF"; 
@@ -225,7 +225,20 @@ onload = function() {
     eIndex[8].edge   = new MFAC.Vector2(0, 4);      eIndex[8].type  = "X-DIF";
     eIndex[9].edge   = new MFAC.Vector2(1, 5);      eIndex[9].type  = "X-DIF";
     eIndex[10].edge  = new MFAC.Vector2(2, 6);      eIndex[10].type = "X-DIF";
-    eIndex[11].edge  = new MFAC.Vector2(3, 7);      eIndex[11].type = "X-DIF";
+    eIndex[11].edge  = new MFAC.Vector2(3, 7);      eIndex[11].type = "X-DIF";*/
+
+    eIndex[0].edge   = new MFAC.Vector2(0, 1);      eIndex[0].type  = "X-DIF";
+    eIndex[1].edge   = new MFAC.Vector2(1, 2);      eIndex[1].type  = "Z-DIF";       
+    eIndex[2].edge   = new MFAC.Vector2(2, 3);      eIndex[2].type  = "X-DIF";
+    eIndex[3].edge   = new MFAC.Vector2(3, 0);      eIndex[3].type  = "Z-DIF"; 
+    eIndex[4].edge   = new MFAC.Vector2(4, 5);      eIndex[4].type  = "X-DIF";
+    eIndex[5].edge   = new MFAC.Vector2(5, 6);      eIndex[5].type  = "Z-DIF";
+    eIndex[6].edge   = new MFAC.Vector2(6, 7);      eIndex[6].type  = "X-DIF";
+    eIndex[7].edge   = new MFAC.Vector2(7, 4);      eIndex[7].type  = "Z-DIF";
+    eIndex[8].edge   = new MFAC.Vector2(0, 4);      eIndex[8].type  = "Y-DIF";
+    eIndex[9].edge   = new MFAC.Vector2(1, 5);      eIndex[9].type  = "Y-DIF";
+    eIndex[10].edge  = new MFAC.Vector2(2, 6);      eIndex[10].type = "Y-DIF";
+    eIndex[11].edge  = new MFAC.Vector2(3, 7);      eIndex[11].type = "Y-DIF";
 
     var trianglTable = getTriangle();
     
@@ -252,7 +265,7 @@ onload = function() {
         }
 
         result = parseInt(result,2);
-        result = result.toString(10);
+        result = result.toString(10); 
         return Number(result);//返回三角形类型编号
 
     }
@@ -272,7 +285,7 @@ onload = function() {
         var z2 = voxel[i].vertex[pointNum2].z;
 
     
-        var temps = ((1 - voxel[i].vertex[pointNum1].value) / (voxel[i].vertex[pointNum2].value - voxel[i].vertex[pointNum1].value));
+        var temps = ((0.6 - voxel[i].vertex[pointNum1].value) / (voxel[i].vertex[pointNum2].value - voxel[i].vertex[pointNum1].value));
         var type  = eIndex[lineNum].type;
 
         if(type == "X-DIF") {
@@ -302,7 +315,7 @@ onload = function() {
 
     function createCell(d, column, row, layer) {
 
-        d = 1;
+        d = 0.5;
         var cell  = new Array();
        
         var length = 0;
@@ -313,7 +326,41 @@ onload = function() {
 
                 for(var k = 0; k < column; k+=d) {
 
-                    cell[length] = new voxel();//2号顶点是基准点
+                    /*var ve_T = new Float32Array([
+
+                    k, j, i,
+
+                    k, j+d, i,
+
+                    k, j+d, i+d,
+
+                    k+d,j+d,  i 
+        
+                    ]);
+
+                var color_T = new Float32Array([
+
+                    0, 0, 1, 1,
+                    0, 0, 1, 1,
+                    0, 0, 1, 1,
+                    0, 0, 1, 1,
+                    0, 0, 1, 1,
+
+                    ]);
+                 var index_T = new Uint8Array([
+
+                    0, 1,
+                    1, 2,
+                    1, 3
+
+
+                    ]);
+
+                    var mesh = new MFAC.Geometry.mesh(ve_T, color_T, index_T);
+                    mesh.drawType = MFAC.gl.LINES;
+                    scene.add(mesh)*/
+
+                    /*cell[length] = new voxel();//2号顶点是基准点
                     cell[length].vertex[0].x = k;
                     cell[length].vertex[0].y = j + d;
                     cell[length].vertex[0].z = i + d;
@@ -340,10 +387,39 @@ onload = function() {
                     cell[length].vertex[7].z = i + d;
                     cell[length].x = k;
                     cell[length].y = j;
-                    cell[length].z = i;
+                    cell[length].z = i;*/
 
                     /*var sphere = new MFAC.Geometry.sphere(new MFAC.Vector3(k ,j ,i), 0.4);
                     scene.add(sphere); */                    
+                    
+                    cell[length] = new voxel();//2号顶点是基准点
+                    cell[length].vertex[0].x = k;
+                    cell[length].vertex[0].y = j;
+                    cell[length].vertex[0].z = i;
+                    cell[length].vertex[1].x = k + d;
+                    cell[length].vertex[1].y = j;
+                    cell[length].vertex[1].z = i;
+                    cell[length].vertex[2].x = k + d;
+                    cell[length].vertex[2].y = j;
+                    cell[length].vertex[2].z = i + d;
+                    cell[length].vertex[3].x = k;
+                    cell[length].vertex[3].y = j;
+                    cell[length].vertex[3].z = i + d;
+                    cell[length].vertex[4].x = k;
+                    cell[length].vertex[4].y = j + d;
+                    cell[length].vertex[4].z = i;
+                    cell[length].vertex[5].x = k + d;
+                    cell[length].vertex[5].y = j + d;
+                    cell[length].vertex[5].z = i;
+                    cell[length].vertex[6].x = k + d;
+                    cell[length].vertex[6].y = j + d;
+                    cell[length].vertex[6].z = i + d;
+                    cell[length].vertex[7].x = k;
+                    cell[length].vertex[7].y = j + d;
+                    cell[length].vertex[7].z = i + d;
+                    cell[length].x = k;
+                    cell[length].y = j;
+                    cell[length].z = i;
                     length++;
 
             }
@@ -372,7 +448,7 @@ onload = function() {
 
     }
 
-    function calculatePointValue(x, y, z, ball) {
+    /*function calculatePointValue(x, y, z, ball) {
 
         var length = ball.length;
         var E = 0; var E1 = 0;
@@ -389,27 +465,26 @@ onload = function() {
 
         return E;
 
-    }
+    }*/
 
-    /*function calculatePointValue(x, y, z, ball) {
+    function calculatePointValue(x, y, z, ball) {
 
         var length = ball.length;    
-        var R = 100;
+        var R = 15;
      
         var E = 0;
         for(var i = 0; i < length; i++) {
 
             var r = ((x - ball[i].center.x) * (x - ball[i].center.x) + (y - ball[i].center.y) * (y - ball[i].center.y) + (z - ball[i].center.z) * (z - ball[i].center.z));
             var r_sqrt = Math.sqrt(r);
-            var EN = muraKami(r_sqrt,R);
+            var EN = ball[i].r * ball[i].r / r;//muraKami(ball[i].r,r_sqrt);
             E += (EN * EN) / r;
             //if(r == 0)alert(x - ball[i].center.x)
 
         }
-        
         return E;
 
-    }*/
+    }
 
     function draw(cell,ball,eIndex,s) {
 
@@ -427,7 +502,7 @@ onload = function() {
 
             var voxelNum = getVoxelConfig(temp1);
         
-            var temp2 = new Array();
+            var temp2 = new Array();//边的编号
             for(var k = 0; k < 16; k+=3) {
 
                 var temp3 = trianglTable[voxelNum][k];
@@ -464,11 +539,15 @@ onload = function() {
         
                     ]);
 
+                var a, b, c;
+                a = 1;
+                b = 0;
+                c = 0;
                 var color_T = new Float32Array([
 
-                    0, 0, 1, 1,
-                    0, 1, 0, 1,
-                    1, 0, 0, 1
+                    a, b, c, 1,
+                    a, b, c, 1,
+                    a, b, c, 1
 
                     ]);
 
@@ -480,7 +559,8 @@ onload = function() {
                     ]);
 
                 var triangle = new MFAC.Geometry.mesh(ve_T, color_T, index_T);
-                scene.add(triangle)
+                //triangle.drawType = MFAC.gl.LINES;
+                scene.add(triangle);
 
                         }
 
@@ -489,10 +569,10 @@ onload = function() {
 
     }
 
-    var cell = createCell(1, 20, 20, 20);
-    var ball = new Ball(new MFAC.Vector3(10, 10, 10), 8);
-    //var ball2 = new Ball(new MFAC.Vector3(25, 25, 25), 8);
-    draw(cell,[ball],eIndex,1);
+    var cell = createCell(1, 10, 10, 10);
+    var ball1 = new Ball(new MFAC.Vector3(3, 3, 3), 3);
+    //var ball2 = new Ball(new MFAC.Vector3(3, 3, 3), 6);
+    draw(cell,[ball1,],eIndex,1);
 
 
 

@@ -2,7 +2,7 @@ MFAC.Shaders = function() { }
 
 MFAC.Shaders.prototype = {
 
-	creatShader : function(id, fileName){
+	createShader : function(id, fileName){
 
 		var shader;
      	var scriptElement = id;
@@ -98,7 +98,7 @@ MFAC.Init.createIbo = function(data){
 
     var ibo = MFAC.gl.createBuffer();
     MFAC.gl.bindBuffer(MFAC.gl.ELEMENT_ARRAY_BUFFER, ibo);
-    MFAC.gl.bufferData(MFAC.gl.ELEMENT_ARRAY_BUFFER, new Int16Array(data), MFAC.gl.STATIC_DRAW);
+    MFAC.gl.bufferData(MFAC.gl.ELEMENT_ARRAY_BUFFER, new Int16Array(data), MFAC.gl.DYNAMIC_DRAW);
     MFAC.gl.bindBuffer(MFAC.ELEMENT_ARRAY_BUFFER, null);
 
     return ibo;   
@@ -286,6 +286,11 @@ MFAC.Geometry.mesh = function(position, color, index, transparency) {//法线没
 
 }
 
+MFAC.Geometry.metaball  = function() {
+
+    
+    
+}
 
 MFAC.Geometry.cube = function(position, color, transparency) {
 
