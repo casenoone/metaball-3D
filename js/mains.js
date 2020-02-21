@@ -563,7 +563,7 @@ onload = function() {
 
 
 
-    var numMetaballs = 20;
+    var numMetaballs = 50;
 
     var cubeGrid = new CUBE_GRID();
     var metaballs = new Array();
